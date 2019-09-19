@@ -17,17 +17,17 @@
 package com.example.android.tiltspot;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
+//import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Display;
-import android.view.Surface;
-import android.view.WindowManager;
-import android.widget.ImageView;
+//import android.view.Display;
+//import android.view.Surface;
+//import android.view.WindowManager;
+//import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
@@ -40,43 +40,44 @@ public class MainActivity extends AppCompatActivity
     // sensor manager.
     private Sensor mSensorAccelerometer;
     private Sensor mSensorMagnetometer;
+    private Sensor mSensorPressure;
+    private Sensor mSensorGyroscope;
+    private Sensor mSensorLight;
 
     // Current data from accelerometer & magnetometer.  The arrays hold values
     // for X, Y, and Z.
-    private float[] mAccelerometerData = new float[3];
-    private float[] mMagnetometerData = new float[3];
 
-    // TextViews to display current sensor values.
-    private TextView mTextSensorAzimuth;
-    private TextView mTextSensorPitch;
-    private TextView mTextSensorRoll;
 
-    // ImageView drawables to display spots.
-    private ImageView mSpotTop;
-    private ImageView mSpotBottom;
-    private ImageView mSpotLeft;
-    private ImageView mSpotRight;
+    private TextView mTextSensorAccelX;
+    private TextView mTextSensorAccelY;
+    private TextView mTextSensorAccelZ;
+    private TextView mTextSensorMagX;
+    private TextView mTextSensorMagY;
+    private TextView mTextSensorMagZ;
+    private TextView mTextSensorPressure;
+    private TextView mTextSensorGyroX;
+    private TextView mTextSensorGyroY;
+    private TextView mTextSensorGyroZ;
+    private TextView mTextSensorLight;
 
-    // System display. Need this for determining rotation.
-    private Display mDisplay;
 
-    // Very small values for the accelerometer (on all three axes) should
-    // be interpreted as 0. This value is the amount of acceptable
-    // non-zero drift.
-    private static final float VALUE_DRIFT = 0.05f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextSensorAzimuth = (TextView) findViewById(R.id.value_azimuth);
-        mTextSensorPitch = (TextView) findViewById(R.id.value_pitch);
-        mTextSensorRoll = (TextView) findViewById(R.id.value_roll);
-        mSpotTop = (ImageView) findViewById(R.id.spot_top);
-        mSpotBottom = (ImageView) findViewById(R.id.spot_bottom);
-        mSpotLeft = (ImageView) findViewById(R.id.spot_left);
-        mSpotRight = (ImageView) findViewById(R.id.spot_right);
+        mTextSensorAccelX = (TextView) findViewById(R.id.label_Ax);
+        mTextSensorAccelY = (TextView) findViewById(R.id.label_Ay);
+        mTextSensorAccelZ = (TextView) findViewById(R.id.label_Az);
+        mTextSensorMagX = (TextView) findViewById(R.id.label_Mx);
+        mTextSensorMagY = (TextView) findViewById(R.id.label_My);
+        mTextSensorMagZ = (TextView) findViewById(R.id.label_Mz);
+        mTextSensorPressure = (TextView) findViewById(R.id.label_P);
+        mTextSensorGyroX = (TextView) findViewById(R.id.label_Gx);
+        mTextSensorGyroY = (TextView) findViewById(R.id.label_Gy);
+        mTextSensorGyroZ = (TextView) findViewById(R.id.label_Gz);
+        mTextSensorLight = (TextView) findViewById(R.id.label_L);
 
         // Get accelerometer and magnetometer sensors from the sensor manager.
         // The getDefaultSensor() method returns null if the sensor
@@ -87,10 +88,14 @@ public class MainActivity extends AppCompatActivity
                 Sensor.TYPE_ACCELEROMETER);
         mSensorMagnetometer = mSensorManager.getDefaultSensor(
                 Sensor.TYPE_MAGNETIC_FIELD);
+        mSensorPressure = mSensorManager.getDefaultSensor(
+                Sensor.TYPE_PRESSURE);
+        mSensorGyroscope = mSensorManager.getDefaultSensor(
+                Sensor.TYPE_GYROSCOPE);
+        mSensorLight = mSensorManager.getDefaultSensor(
+                Sensor.TYPE_LIGHT);
 
-        // Get the display from the window manager (for rotation).
-        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-        mDisplay = wm.getDefaultDisplay();
+
     }
 
     /**
@@ -115,6 +120,18 @@ public class MainActivity extends AppCompatActivity
             mSensorManager.registerListener(this, mSensorMagnetometer,
                     SensorManager.SENSOR_DELAY_NORMAL);
         }
+        if (mSensorPressure != null) {
+            mSensorManager.registerListener(this, mSensorPressure,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
+        if (mSensorGyroscope != null) {
+            mSensorManager.registerListener(this, mSensorGyroscope,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
+        if (mSensorLight != null) {
+            mSensorManager.registerListener(this, mSensorLight,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
     }
 
     @Override
@@ -131,102 +148,38 @@ public class MainActivity extends AppCompatActivity
         // The sensor type (as defined in the Sensor class).
         int sensorType = sensorEvent.sensor.getType();
 
+        float currentValue1 = sensorEvent.values[0];
+        float currentValue2 = sensorEvent.values[1];
+        float currentValue3 = sensorEvent.values[2];
+
         // The sensorEvent object is reused across calls to onSensorChanged().
-        // clone() gets a copy so the data doesn't change out from under us
         switch (sensorType) {
             case Sensor.TYPE_ACCELEROMETER:
-                mAccelerometerData = sensorEvent.values.clone();
+                mTextSensorAccelX.setText(getResources().getString(R.string.label_Ax, currentValue1));
+                mTextSensorAccelY.setText(getResources().getString(R.string.label_Ay, currentValue2));
+                mTextSensorAccelZ.setText(getResources().getString(R.string.label_Az, currentValue3));
                 break;
             case Sensor.TYPE_MAGNETIC_FIELD:
-                mMagnetometerData = sensorEvent.values.clone();
+                mTextSensorMagX.setText(getResources().getString(R.string.label_Mx, currentValue1));
+                mTextSensorMagY.setText(getResources().getString(R.string.label_My, currentValue2));
+                mTextSensorMagZ.setText(getResources().getString(R.string.label_Mz, currentValue3));
+                break;
+            case Sensor.TYPE_PRESSURE:
+                mTextSensorPressure.setText(getResources().getString(R.string.label_P, currentValue1));
+                break;
+            case Sensor.TYPE_GYROSCOPE:
+                mTextSensorGyroX.setText(getResources().getString(R.string.label_Gx, currentValue1));
+                mTextSensorGyroY.setText(getResources().getString(R.string.label_Gy, currentValue2));
+                mTextSensorGyroZ.setText(getResources().getString(R.string.label_Gz, currentValue3));
+                break;
+            case Sensor.TYPE_LIGHT:
+                mTextSensorLight.setText(getResources().getString(R.string.label_L, currentValue1));
                 break;
             default:
-                return;
-        }
-        // Compute the rotation matrix: merges and translates the data
-        // from the accelerometer and magnetometer, in the device coordinate
-        // system, into a matrix in the world's coordinate system.
-        //
-        // The second argument is an inclination matrix, which isn't
-        // used in this example.
-        float[] rotationMatrix = new float[9];
-        boolean rotationOK = SensorManager.getRotationMatrix(rotationMatrix,
-                null, mAccelerometerData, mMagnetometerData);
-
-        // Remap the matrix based on current device/activity rotation.
-        float[] rotationMatrixAdjusted = new float[9];
-        switch (mDisplay.getRotation()) {
-            case Surface.ROTATION_0:
-                rotationMatrixAdjusted = rotationMatrix.clone();
-                break;
-            case Surface.ROTATION_90:
-                SensorManager.remapCoordinateSystem(rotationMatrix,
-                        SensorManager.AXIS_Y, SensorManager.AXIS_MINUS_X,
-                        rotationMatrixAdjusted);
-                break;
-            case Surface.ROTATION_180:
-                SensorManager.remapCoordinateSystem(rotationMatrix,
-                        SensorManager.AXIS_MINUS_X, SensorManager.AXIS_MINUS_Y,
-                        rotationMatrixAdjusted);
-                break;
-            case Surface.ROTATION_270:
-                SensorManager.remapCoordinateSystem(rotationMatrix,
-                        SensorManager.AXIS_MINUS_Y, SensorManager.AXIS_X,
-                        rotationMatrixAdjusted);
                 break;
         }
 
-        // Get the orientation of the device (azimuth, pitch, roll) based
-        // on the rotation matrix. Output units are radians.
-        float orientationValues[] = new float[3];
-        if (rotationOK) {
-            SensorManager.getOrientation(rotationMatrixAdjusted,
-                    orientationValues);
-        }
 
-        // Pull out the individual values from the array.
-        float azimuth = orientationValues[0];
-        float pitch = orientationValues[1];
-        float roll = orientationValues[2];
-
-        // Pitch and roll values that are close to but not 0 cause the
-        // animation to flash a lot. Adjust pitch and roll to 0 for very
-        // small values (as defined by VALUE_DRIFT).
-        if (Math.abs(pitch) < VALUE_DRIFT) {
-            pitch = 0;
-        }
-        if (Math.abs(roll) < VALUE_DRIFT) {
-            roll = 0;
-        }
-
-        // Fill in the string placeholders and set the textview text.
-        mTextSensorAzimuth.setText(getResources().getString(
-                R.string.value_format, azimuth));
-        mTextSensorPitch.setText(getResources().getString(
-                R.string.value_format, pitch));
-        mTextSensorRoll.setText(getResources().getString(
-                R.string.value_format, roll));
-
-        // Reset all spot values to 0. Without this animation artifacts can
-        // happen with fast tilts.
-        mSpotTop.setAlpha(0f);
-        mSpotBottom.setAlpha(0f);
-        mSpotLeft.setAlpha(0f);
-        mSpotRight.setAlpha(0f);
-
-        // Set spot color (alpha/opacity) equal to pitch/roll.
-        // this is not a precise grade (pitch/roll can be greater than 1)
-        // but it's close enough for the animation effect.
-        if (pitch > 0) {
-            mSpotBottom.setAlpha(pitch);
-        } else {
-            mSpotTop.setAlpha(Math.abs(pitch));
-        }
-        if (roll > 0) {
-            mSpotLeft.setAlpha(roll);
-        } else {
-            mSpotRight.setAlpha(Math.abs(roll));
-        }
     }
 
     /**

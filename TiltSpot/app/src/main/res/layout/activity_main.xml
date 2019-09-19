@@ -23,127 +23,235 @@ limitations under the License. -->
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/label_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="680dp"
         android:layout_margin="@dimen/base_margin"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.493">
 
         <!-- Labels -->
-        <TextView
-            android:id="@+id/label_azimuth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_azimuth_string"
-            style="@style/Label"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/label_group"/>
-
-        <TextView
-            android:id="@+id/label_pitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_pitch_string"
-            style="@style/Label"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_azimuth"/>
-
-        <TextView
-            android:id="@+id/label_roll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_roll_string"
-            style="@style/Label"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_pitch"/>
 
         <!-- Values -->
-        <TextView
-            android:id="@+id/value_azimuth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/base_margin"
-            android:layout_marginStart="@dimen/base_margin"
-            android:text="@string/value_format"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            app:layout_constraintLeft_toRightOf="@id/label_azimuth"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/label_group"/>
 
         <TextView
-            android:id="@+id/value_pitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/value_format"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/value_azimuth"/>
+            android:id="@+id/label_Ax"
+            style="@style/Label"
+            android:layout_width="100dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="90dp"
+            android:layout_marginRight="90dp"
+            android:text="@string/label_Ax"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/value_roll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/value_format"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/value_pitch"/>
+            android:id="@+id/label_Ay"
+            style="@style/Label"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="90dp"
+            android:layout_marginRight="90dp"
+            android:text="@string/label_Ay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_Ax" />
+
+        <TextView
+            android:id="@+id/label_Az"
+            style="@style/Label"
+            android:layout_width="100dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="90dp"
+            android:layout_marginRight="90dp"
+            android:text="@string/label_Az"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_Ay" />
+
+        <TextView
+            android:id="@+id/label_Mx"
+            style="@style/Label"
+            android:layout_width="85dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="90dp"
+            android:layout_marginRight="90dp"
+            android:text="@string/label_Mx"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Geomagnetic Field" />
+
+        <TextView
+            android:id="@+id/label_My"
+            style="@style/Label"
+            android:layout_width="83dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="90dp"
+            android:layout_marginRight="90dp"
+            android:text="@string/label_My"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_Mx" />
+
+        <TextView
+            android:id="@+id/label_Mz"
+            style="@style/Label"
+            android:layout_width="83dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="90dp"
+            android:layout_marginRight="90dp"
+            android:text="@string/label_Mz"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_My" />
+
+        <TextView
+            android:id="@+id/label_P"
+            style="@style/Label"
+            android:layout_width="127dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/label_P"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_Mz" />
+
+        <TextView
+            android:id="@+id/label_Gx"
+            style="@style/Label"
+            android:layout_width="92dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="90dp"
+            android:layout_marginRight="90dp"
+            android:text="@string/label_Gx"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Gyroscope" />
+
+        <TextView
+            android:id="@+id/label_Gy"
+            style="@style/Label"
+            android:layout_width="94dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="90dp"
+            android:layout_marginRight="90dp"
+            android:text="@string/label_Gy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_Gx" />
+
+        <TextView
+            android:id="@+id/label_Gz"
+            style="@style/Label"
+            android:layout_width="94dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="90dp"
+            android:layout_marginRight="90dp"
+            android:text="@string/label_Gz"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_Gy" />
+
+        <TextView
+            android:id="@+id/label_L"
+            style="@style/Label"
+            android:layout_width="129dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginRight="80dp"
+            android:text="@string/label_L"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_Gz" />
+
+        <EditText
+            android:id="@+id/Accelerometer"
+            android:layout_width="121dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="91dp"
+            android:layout_marginRight="91dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/Gyroscope"
+            android:layout_width="121dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="90dp"
+            android:layout_marginRight="90dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_P" />
+
+        <EditText
+            android:id="@+id/Geomagnetic Field"
+            android:layout_width="139dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="91dp"
+            android:layout_marginRight="91dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_Az" />
+
     </android.support.constraint.ConstraintLayout>
 
     <!-- Four spot drawables for the cardinal directions on the device.
        The drawables are 100% black by default (in the XML). Alpha sets the
        "tint" to shades of gray. Setting the alpha to 0 here makes them
        invisible. -->
-    <ImageView
-        android:id="@+id/spot_top"
-        android:layout_width="@dimen/spot_size"
-        android:layout_height="@dimen/spot_size"
-        android:layout_marginTop="@dimen/base_margin"
-        android:alpha="0.05"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/spot"
-        tools:ignore="ContentDescription" />
-
-    <ImageView
-        android:id="@+id/spot_bottom"
-        android:layout_width="@dimen/spot_size"
-        android:layout_height="@dimen/spot_size"
-        android:layout_marginBottom="@dimen/base_margin"
-        android:alpha="0.05"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/spot"
-        tools:ignore="ContentDescription" />
-
-    <ImageView
-        android:id="@+id/spot_right"
-        android:layout_width="@dimen/spot_size"
-        android:layout_height="@dimen/spot_size"
-        android:layout_marginEnd="@dimen/base_margin"
-        android:layout_marginRight="@dimen/base_margin"
-        android:alpha="0.05"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/spot"
-        tools:ignore="ContentDescription"/>
-
-    <ImageView
-        android:id="@+id/spot_left"
-        android:layout_width="@dimen/spot_size"
-        android:layout_height="@dimen/spot_size"
-        android:layout_marginLeft="@dimen/base_margin"
-        android:layout_marginStart="@dimen/base_margin"
-        android:alpha="0.05"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/spot"
-        tools:ignore="ContentDescription" />
 
 </android.support.constraint.ConstraintLayout>

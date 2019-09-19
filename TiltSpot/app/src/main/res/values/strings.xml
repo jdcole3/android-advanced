@@ -15,13 +15,16 @@ limitations under the License. -->
     <string name="app_name">TiltSpot</string>
 
     <!-- Text view labels for orientation data -->
-    <string name="label_azimuth_string">Azmiuth:</string>
-    <string name="label_pitch_string">Pitch:</string>
-    <string name="label_roll_string">Roll:</string>
+    <string name="label_Ax">X: %1$.2f m/s^2</string>
+    <string name="label_Ay">Y: %1$.2f m/s^2</string>
+    <string name="label_Az">Z: %1$.2f m/s^2</string>
+    <string name="label_Mx">X: %1$.2f uT</string>
+    <string name="label_My">Y: %1$.2f uT</string>
+    <string name="label_Mz">Z:%1$.2f uT</string>
+    <string name="label_P">Pressure: %1$.2f hPa</string>
+    <string name="label_Gx">X: %1$.2f rad/s</string>
+    <string name="label_Gy">Y: %1$.2f rad/s</string>
+    <string name="label_Gz">Z: %1$.2f rad/s</string>
+    <string name="label_L">Light Level: %1$.2f lux</string>
 
-    <!-- String for the orientation values. The %1$.2f part is a placeholder
-     that will be filled in at runtime:
-     %1 is the value to replace
-     $.2f says the value is a float, with two decimal places.  -->
-    <string name="value_format">%1$.2f</string>
 </resources>
